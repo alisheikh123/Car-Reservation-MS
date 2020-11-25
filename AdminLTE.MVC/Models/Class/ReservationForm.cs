@@ -23,6 +23,7 @@ namespace AdminLTE.MVC.Models.Class
         [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
 
+        [RegularExpression("^[0-9]{5}-[0-9]{7}-[0-9]",ErrorMessage ="Format Must Be XXXXX-XXXXXXXX-X")]
         public string CNIC { get; set; }
         [Display(Name = "Mobile No")]
         public string MobileNo { get; set; }
