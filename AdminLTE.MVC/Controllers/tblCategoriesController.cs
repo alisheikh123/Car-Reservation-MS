@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AdminLTE.MVC.Controllers
 {
+    [AllowAnonymous]
     public class tblCategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +22,7 @@ namespace AdminLTE.MVC.Controllers
         }
 
 
-        [AllowAnonymous]
+        
         // GET: tblCategories
         public async Task<IActionResult> Index()
         {

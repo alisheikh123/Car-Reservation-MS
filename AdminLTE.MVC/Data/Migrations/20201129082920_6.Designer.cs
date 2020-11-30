@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdminLTE.MVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201125051723_addmodel7")]
-    partial class addmodel7
+    [Migration("20201129082920_6")]
+    partial class _6
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,7 @@ namespace AdminLTE.MVC.Data.Migrations
                     b.Property<string>("Brand_Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Car")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model_No")
@@ -61,7 +61,6 @@ namespace AdminLTE.MVC.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -71,6 +70,145 @@ namespace AdminLTE.MVC.Data.Migrations
                     b.HasKey("catId");
 
                     b.ToTable("tblCategories");
+                });
+
+            modelBuilder.Entity("Car_Rental_System.Models.tblCustomer", b =>
+                {
+                    b.Property<int>("cusid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CNIC")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("First_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Last_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("mobileno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("state")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("cusid");
+
+                    b.ToTable("tblCustomer");
+                });
+
+            modelBuilder.Entity("Car_Rental_System.Models.tblPhone", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PhoneNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("locid")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("locid");
+
+                    b.ToTable("tblPhone");
+                });
+
+            modelBuilder.Entity("Car_Rental_System.Models.tblReservation", b =>
+                {
+                    b.Property<int>("resId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Pick_Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Pick_location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Return_Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Return_location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("amount")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<int>("carId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("cusid")
+                        .HasColumnType("int");
+
+                    b.HasKey("resId");
+
+                    b.HasIndex("carId");
+
+                    b.HasIndex("cusid");
+
+                    b.ToTable("tblReservation");
+                });
+
+            modelBuilder.Entity("Car_Rental_System.Models.tbllocation", b =>
+                {
+                    b.Property<int>("locationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("city")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("fDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("fLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("state")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("stateabre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("streetAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("streetNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("tDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("tLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("locationId");
+
+                    b.ToTable("tbllocation");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -278,6 +416,30 @@ namespace AdminLTE.MVC.Data.Migrations
                     b.HasOne("Car_Rental_System.Models.tblCategories", "tblCategories")
                         .WithMany()
                         .HasForeignKey("catId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Car_Rental_System.Models.tblPhone", b =>
+                {
+                    b.HasOne("Car_Rental_System.Models.tbllocation", "tbllocation")
+                        .WithMany()
+                        .HasForeignKey("locid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Car_Rental_System.Models.tblReservation", b =>
+                {
+                    b.HasOne("Car_Rental_System.Models.tblCars", "tblCars")
+                        .WithMany()
+                        .HasForeignKey("carId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Car_Rental_System.Models.tblCustomer", "tblCustomer")
+                        .WithMany()
+                        .HasForeignKey("cusid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

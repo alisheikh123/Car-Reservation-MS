@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdminLTE.MVC.Data;
 using Car_Rental_System.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AdminLTE.MVC.Controllers
 {
+    [AllowAnonymous]
     public class tblCustomersController : Controller
     {
         private readonly ApplicationDbContext db;

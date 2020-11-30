@@ -2,7 +2,7 @@
 
 namespace AdminLTE.MVC.Data.Migrations
 {
-    public partial class addmodel2 : Migration
+    public partial class _6 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

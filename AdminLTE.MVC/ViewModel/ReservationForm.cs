@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace AdminLTE.MVC.Models.Class
         public string Category { get; set; }
         public int carId { get; set; }
         public string Car { get; set; }
+        public string CountryCode { get; set; }
+        
         public string Brand { get; set; }    
         public string Color { get; set; }
         public string Model { get; set; }
@@ -48,7 +51,7 @@ namespace AdminLTE.MVC.Models.Class
         public string fromLocation { get; set; }
 
         [Display(Name = "From Date")]
-
+        [DataType(DataType.Date)]
         public DateTime fromDate { get; set; }
 
         [Display(Name = "To Location")]

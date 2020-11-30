@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdminLTE.MVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201125052745_addmodel8")]
-    partial class addmodel8
+    [Migration("20201129075008_4")]
+    partial class _4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,7 @@ namespace AdminLTE.MVC.Data.Migrations
                     b.Property<string>("Brand_Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Car")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model_No")
@@ -61,7 +61,6 @@ namespace AdminLTE.MVC.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -100,8 +99,9 @@ namespace AdminLTE.MVC.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("mobileno")
-                        .HasColumnType("int");
+                    b.Property<string>("mobileno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("state")
                         .HasColumnType("nvarchar(max)");

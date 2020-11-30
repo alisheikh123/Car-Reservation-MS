@@ -1,18 +1,37 @@
 ﻿@model Car_Rental_System.Models.tbllocation
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
 <h4>tbllocation</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="locationId" />
+            <div class="form-group">
+                <label asp-for="fLocation" class="control-label"></label>
+                <input asp-for="fLocation" class="form-control" />
+                <span asp-validation-for="fLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tLocation" class="control-label"></label>
+                <input asp-for="tLocation" class="form-control" />
+                <span asp-validation-for="tLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fDate" class="control-label"></label>
+                <input asp-for="fDate" class="form-control" />
+                <span asp-validation-for="fDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tDate" class="control-label"></label>
+                <input asp-for="tDate" class="form-control" />
+                <span asp-validation-for="tDate" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="streetNo" class="control-label"></label>
                 <input asp-for="streetNo" class="form-control" />
@@ -44,7 +63,7 @@
                 <span asp-validation-for="country" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -54,6 +73,3 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

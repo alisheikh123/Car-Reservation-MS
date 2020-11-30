@@ -7,25 +7,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdminLTE.MVC.Data;
 using Car_Rental_System.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AdminLTE.MVC.Controllers
 {
-    public class tbllocationsController : Controller
+    [AllowAnonymous]
+    public class locationsController : Controller
     {
         private readonly ApplicationDbContext db;
 
-        public tbllocationsController(ApplicationDbContext context)
+        public locationsController(ApplicationDbContext context)
         {
             db = context;
         }
 
-        // GET: tbllocations
+        // GET: locations
         public async Task<IActionResult> Index()
         {
             return View(await db.tbllocation.ToListAsync());
         }
 
-        // GET: tbllocations/Details/5
+        // GET: locations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,18 +45,18 @@ namespace AdminLTE.MVC.Controllers
             return View(tbllocation);
         }
 
-        // GET: tbllocations/Create
+        // GET: locations/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: tbllocations/Create
+        // POST: locations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("locationId,streetNo,streetAddress,city,stateabre,state,country")] tbllocation tbllocation)
+        public async Task<IActionResult> Create([Bind("locationId,fLocation,tLocation,fDate,tDate,streetNo,streetAddress,city,stateabre,state,country")] tbllocation tbllocation)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +67,7 @@ namespace AdminLTE.MVC.Controllers
             return View(tbllocation);
         }
 
-        // GET: tbllocations/Edit/5
+        // GET: locations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,12 +83,12 @@ namespace AdminLTE.MVC.Controllers
             return View(tbllocation);
         }
 
-        // POST: tbllocations/Edit/5
+        // POST: locations/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("locationId,streetNo,streetAddress,city,stateabre,state,country")] tbllocation tbllocation)
+        public async Task<IActionResult> Edit(int id, [Bind("locationId,fLocation,tLocation,fDate,tDate,streetNo,streetAddress,city,stateabre,state,country")] tbllocation tbllocation)
         {
             if (id != tbllocation.locationId)
             {
@@ -116,7 +118,7 @@ namespace AdminLTE.MVC.Controllers
             return View(tbllocation);
         }
 
-        // GET: tbllocations/Delete/5
+        // GET: locations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +136,7 @@ namespace AdminLTE.MVC.Controllers
             return View(tbllocation);
         }
 
-        // POST: tbllocations/Delete/5
+        // POST: locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -13,6 +13,18 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.fLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tDate)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.streetNo)
             </th>
             <th>
@@ -36,6 +48,18 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tDate)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.streetNo)
             </td>

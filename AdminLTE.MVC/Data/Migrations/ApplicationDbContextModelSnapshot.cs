@@ -59,7 +59,6 @@ namespace AdminLTE.MVC.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -98,8 +97,9 @@ namespace AdminLTE.MVC.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("mobileno")
-                        .HasColumnType("int");
+                    b.Property<string>("mobileno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("state")
                         .HasColumnType("nvarchar(max)");
@@ -175,27 +175,33 @@ namespace AdminLTE.MVC.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("city")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("country")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("fDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("fLocation")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("state")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("stateabre")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("streetAddress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("streetNo")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("tDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("tLocation")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("locationId");

@@ -37,11 +37,12 @@
                 <input asp-for="Model" class="form-control" />
             </div>
         </div>
+        <button class="btn btn-primary">Submit</button>
     </div>
     <br />
     <hr />
     <div>
-        <h4 style="text-align:center;" >Customer Detail</h4>
+        <h4 style="text-align:center;">Customer Detail</h4>
 
         <div class="row">
             <div class="col-4">
@@ -83,60 +84,60 @@
         </div>
     </div>
 
-    <br />
-    <hr />
-    <div>
-        <h4 style="text-align:center;">Location Details</h4>
-        <div class="row">
-            <div class="col-4">
-                <label asp-for="fromLocation" class="control-label"></label>
-                <input asp-for="fromLocation" class="form-control" />
+  <br />
+        <hr />
+        <div>
+            <h4 style="text-align:center;">Location Details</h4>
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="fromLocation" class="control-label"></label>
+                    <input asp-for="fromLocation" class="form-control" />
+                </div>
+                <div class="col-4">
+                    <label asp-for="fromDate" class="control-label"></label>
+                    <input asp-for="fromDate" class="form-control" value="@(ViewBag.fDate)" />
+                </div>
+                <div class="col-4">
+                    <label asp-for="toLocation" class="control-label"></label>
+                    <input asp-for="toLocation" class="form-control"   />
+                </div>
+
             </div>
-            <div class="col-4">
-                <label asp-for="fromDate" class="control-label"></label>
-                <input asp-for="fromDate" class="form-control" />
+            <div class="row">
+
+                <div class="col-4">
+                    <label asp-for="toDate" class="control-label"></label>
+                    <input asp-for="toDate" class="form-control" />
+                </div>
+                <div class="col-4">
+                    <label asp-for="StreetNo" class="control-label"></label>
+                    <input asp-for="StreetNo" class="form-control" />
+                </div>
+                <div class="col-4">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                </div>
+
+
+
             </div>
-            <div class="col-4">
-                <label asp-for="toLocation" class="control-label"></label>
-                <input asp-for="toLocation" class="form-control" />
+
+            <div class="row">
+                <div class="col-4">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" />
+                </div>
+                <div class="col-4">
+                    <label asp-for="Stateloc" class="control-label"></label>
+                    <input asp-for="Stateloc" class="form-control" />
+                </div>
+                <div class="col-4">
+                    <label asp-for="Countryloc" class="control-label"></label>
+                    <input asp-for="Countryloc" class="form-control" />
+                </div>
+
             </div>
-           
+
         </div>
-        <div class="row">
 
-            <div class="col-4">
-                <label asp-for="toDate" class="control-label"></label>
-                <input asp-for="toDate" class="form-control" />
-            </div>
-            <div class="col-4">
-                <label asp-for="StreetNo" class="control-label"></label>
-                <input asp-for="StreetNo" class="form-control" />
-            </div>
-            <div class="col-4">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-            </div>
-
-           
-
-        </div>
-
-        <div class="row">
-            <div class="col-4">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-            </div>
-            <div class="col-4">
-                <label asp-for="Stateloc" class="control-label"></label>
-                <input asp-for="Stateloc" class="form-control" />
-            </div>
-            <div class="col-4">
-                <label asp-for="Countryloc" class="control-label"></label>
-                <input asp-for="Countryloc" class="form-control" />
-            </div>
-
-        </div>
-
-    </div>
-    <button class="btn btn-primary">Submit</button>
 </form>
