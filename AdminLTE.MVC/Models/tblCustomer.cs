@@ -27,7 +27,7 @@ namespace Car_Rental_System.Models
 
         [Required]
         [Display(Name = "CNIC")]
-        [RegularExpression("^[0-9]{5}-[0-9]{7}-[0-9]", ErrorMessage = "Format Must Be XXXXX-XXXXXXXX-X")]
+        [RegularExpression("^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$", ErrorMessage = "Incorrect CNIC")]
         public string CNIC { get; set; }
 
         [Required]

@@ -26,7 +26,7 @@ namespace AdminLTE.MVC.Models.Class
         [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
 
-        [RegularExpression("^[0-9]{5}-[0-9]{7}-[0-9]",ErrorMessage ="Format Must Be XXXXX-XXXXXXXX-X")]
+        [RegularExpression("^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$", ErrorMessage = "Incorrect CNIC")]
         public string CNIC { get; set; }
         [Display(Name = "Mobile No")]
         public string MobileNo { get; set; }
@@ -58,6 +58,7 @@ namespace AdminLTE.MVC.Models.Class
         public string toLocation { get; set; }
 
         [Display(Name = "To Date")]
+        [DataType(DataType.Date)]
         public DateTime toDate { get; set; }
 
 

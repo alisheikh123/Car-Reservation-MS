@@ -33,7 +33,8 @@ namespace AdminLTE.MVC.Controllers
             var country = countries.ToList();
             var cat = db.tblCategories.ToList();
             var car = db.tblCars.ToList();
-            ViewBag.fDate = DateTime.Now;
+            DateTime date = DateTime.Now;
+            ViewBag.fDate = date.ToString("yyyy-MM-dd");
             cat.Insert(0, new Car_Rental_System.Models.tblCategories { catId = 0, Title = "--Select Category--" });
             car.Insert(0, new Car_Rental_System.Models.tblCars { carId = 0, Car = "--Select Car--" });
             
@@ -53,50 +54,51 @@ namespace AdminLTE.MVC.Controllers
         [HttpPost]
         public IActionResult Reservation_Create(ReservationForm Vm)
         {
-            var category = new tblCategories
-            {
-                Title = Vm.Car
-            };
-            var cars = new tblCars
-            {
-                catId = Vm.catId,
-                Car = Vm.Car,
-                color = Vm.Color,
-                Model_No = Vm.Model,
-                Brand_Name = Vm.Brand
-
-            };
-            var cus = new tblCustomer 
-            {
-              First_Name = Vm.FirstName,
-              Last_Name = Vm.LastName,
-              Email = Vm.EmailAddress,
-              CNIC = Vm.CNIC,
-              mobileno = Vm.MobileNo,
-              state = Vm.State,
-              country = Vm.Country
             
-            };
+                var category = new tblCategories
+                {
+                    Title = Vm.Car
+                };
+                var cars = new tblCars
+                {
+                    catId = Vm.catId,
+                    Car = Vm.Car,
+                    color = Vm.Color,
+                    Model_No = Vm.Model,
+                    Brand_Name = Vm.Brand
 
-            var loc = new tbllocation
-            {
-                fLocation = Vm.fromLocation,
-                tLocation = Vm.toLocation,
-                fDate = Vm.fromDate,
-                tDate = Vm.toDate,
-                state = Vm.Stateloc,
-                country = Vm.Countryloc,
-                streetNo = Vm.StreetNo,
-                streetAddress = Vm.Address,
-                city = Vm.City
+                };
+                var cus = new tblCustomer
+                {
+                    First_Name = Vm.FirstName,
+                    Last_Name = Vm.LastName,
+                    Email = Vm.EmailAddress,
+                    CNIC = Vm.CNIC,
+                    mobileno = Vm.MobileNo,
+                    state = Vm.State,
+                    country = Vm.Country
 
-            };
-            db.tblCategories.Add(category);
-            db.tblCars.Add(cars);
-            db.tblCustomer.Add(cus);
-            db.tbllocation.Add(loc);
-            db.SaveChanges();
+                };
 
+                var loc = new tbllocation
+                {
+                    fLocation = Vm.fromLocation,
+                    tLocation = Vm.toLocation,
+                    fDate = Vm.fromDate,
+                    tDate = Vm.toDate,
+                    state = Vm.Stateloc,
+                    country = Vm.Countryloc,
+                    streetNo = Vm.StreetNo,
+                    streetAddress = Vm.Address,
+                    city = Vm.City
+
+                };
+                db.tblCategories.Add(category);
+                db.tblCars.Add(cars);
+                db.tblCustomer.Add(cus);
+                db.tbllocation.Add(loc);
+                db.SaveChanges();
+            
             return View();
         }
     }

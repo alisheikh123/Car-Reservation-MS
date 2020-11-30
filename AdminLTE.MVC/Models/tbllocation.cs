@@ -17,11 +17,12 @@ namespace Car_Rental_System.Models
         
         public string tLocation { get; set; }
 
-        [DataType(DataType.DateTime)]
+        
         [Display(Name = "From Date")]
+       [DataType(DataType.Date)]
         public DateTime fDate { get; set; }
 
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [Display(Name = "To Date")]
         public DateTime tDate { get; set; }
 
