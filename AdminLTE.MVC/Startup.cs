@@ -62,7 +62,7 @@ services.AddMvc(o =>
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+           
             app.UseRouting();
 
             app.UseAuthentication();

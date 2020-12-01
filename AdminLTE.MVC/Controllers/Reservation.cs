@@ -1,4 +1,5 @@
 ﻿using AdminLTE.MVC.Data;
+using AdminLTE.MVC.Models;
 using AdminLTE.MVC.Models.Class;
 using Car_Rental_System.Models;
 using CountryData.Standard;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace AdminLTE.MVC.Controllers
 {
@@ -22,7 +24,25 @@ namespace AdminLTE.MVC.Controllers
             db = context;
         }
 
+
+        public IActionResult getCountry() 
+        {
+            var country = db.tblCountry.ToList();
+            List<tblCountry> countrylist = new List<tblCountry>();
+            foreach (var s in country) 
+            {
+                countrylist.Add(new tblCountry 
+                {
+                
+                    country_Id = s.country_Id,
+                    country_Name = s.country_Name
+                });
+            }
+
+
+            return Json(new { data = countrylist });
         
+        }
         public IActionResult Reservation_Create()
         
         {
@@ -76,7 +96,7 @@ namespace AdminLTE.MVC.Controllers
                     CNIC = Vm.CNIC,
                     mobileno = Vm.MobileNo,
                     state = Vm.State,
-                    country = Vm.Country
+                   
 
                 };
 
@@ -93,10 +113,16 @@ namespace AdminLTE.MVC.Controllers
                     city = Vm.City
 
                 };
+            var coun = new tblCountry
+            {
+                country_Name = Vm.Country.ToString()
+
+            };
                 db.tblCategories.Add(category);
                 db.tblCars.Add(cars);
                 db.tblCustomer.Add(cus);
                 db.tbllocation.Add(loc);
+                db.tblCountry.Add(coun);
                 db.SaveChanges();
             
             return View();

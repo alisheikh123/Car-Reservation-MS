@@ -27,11 +27,13 @@ namespace AdminLTE.MVC.Models.Class
         public string EmailAddress { get; set; }
 
         [RegularExpression("^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$", ErrorMessage = "Incorrect CNIC")]
+        [Display(Name ="CNIC", Prompt = "34602-64160XX-X")]
         public string CNIC { get; set; }
         [Display(Name = "Mobile No")]
         public string MobileNo { get; set; }
         public string State { get; set; }
-        public string Country { get; set; }
+
+        public List<tblCountry> Country { get; set; }
         [Display(Name = "Street No")]
         public string StreetNo { get; set; }
 
