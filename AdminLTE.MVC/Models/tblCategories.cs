@@ -13,7 +13,7 @@ namespace Car_Rental_System.Models
         [Required]
         [Display(Name = "Title")]
         public string Title { get; set; }
-        [Required]
+        
         [Display(Name = "Description")]
         public string Description { get; set; }
     }

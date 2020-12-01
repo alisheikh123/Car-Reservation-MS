@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Car_Rental_System.Models
@@ -25,13 +27,13 @@ namespace Car_Rental_System.Models
 
         [Required]
         [Display(Name = "CNIC")]
-        [RegularExpression("^[0-9]{5}-[0-9]{7}-[0-9]", ErrorMessage = "Format Must Be XXXXX-XXXXXXXX-X")]
+        [RegularExpression("^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$", ErrorMessage = "Incorrect CNIC")]
         public string CNIC { get; set; }
 
         [Required]
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is Empty!")]
-        public int mobileno { get; set; }
+        public string mobileno { get; set; }
 
         [Display(Name = "State")]
         public string state { get; set; }

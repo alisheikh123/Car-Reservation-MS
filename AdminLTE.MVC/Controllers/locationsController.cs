@@ -12,22 +12,22 @@ using Microsoft.AspNetCore.Authorization;
 namespace AdminLTE.MVC.Controllers
 {
     [AllowAnonymous]
-    public class tblCustomersController : Controller
+    public class locationsController : Controller
     {
         private readonly ApplicationDbContext db;
 
-        public tblCustomersController(ApplicationDbContext context)
+        public locationsController(ApplicationDbContext context)
         {
             db = context;
         }
 
-        // GET: tblCustomers
+        // GET: locations
         public async Task<IActionResult> Index()
         {
-            return View(await db.tblCustomer.ToListAsync());
+            return View(await db.tbllocation.ToListAsync());
         }
 
-        // GET: tblCustomers/Details/5
+        // GET: locations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,39 +35,39 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCustomer = await db.tblCustomer
-                .FirstOrDefaultAsync(m => m.cusid == id);
-            if (tblCustomer == null)
+            var tbllocation = await db.tbllocation
+                .FirstOrDefaultAsync(m => m.locationId == id);
+            if (tbllocation == null)
             {
                 return NotFound();
             }
 
-            return View(tblCustomer);
+            return View(tbllocation);
         }
 
-        // GET: tblCustomers/Create
+        // GET: locations/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: tblCustomers/Create
+        // POST: locations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("cusid,First_Name,Last_Name,Email,CNIC,mobileno,state,country")] tblCustomer tblCustomer)
+        public async Task<IActionResult> Create([Bind("locationId,fLocation,tLocation,fDate,tDate,streetNo,streetAddress,city,stateabre,state,country")] tbllocation tbllocation)
         {
             if (ModelState.IsValid)
             {
-                db.Add(tblCustomer);
+                db.Add(tbllocation);
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tblCustomer);
+            return View(tbllocation);
         }
 
-        // GET: tblCustomers/Edit/5
+        // GET: locations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +75,22 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCustomer = await db.tblCustomer.FindAsync(id);
-            if (tblCustomer == null)
+            var tbllocation = await db.tbllocation.FindAsync(id);
+            if (tbllocation == null)
             {
                 return NotFound();
             }
-            return View(tblCustomer);
+            return View(tbllocation);
         }
 
-        // POST: tblCustomers/Edit/5
+        // POST: locations/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("cusid,First_Name,Last_Name,Email,CNIC,mobileno,state,country")] tblCustomer tblCustomer)
+        public async Task<IActionResult> Edit(int id, [Bind("locationId,fLocation,tLocation,fDate,tDate,streetNo,streetAddress,city,stateabre,state,country")] tbllocation tbllocation)
         {
-            if (id != tblCustomer.cusid)
+            if (id != tbllocation.locationId)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace AdminLTE.MVC.Controllers
             {
                 try
                 {
-                    db.Update(tblCustomer);
+                    db.Update(tbllocation);
                     await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!tblCustomerExists(tblCustomer.cusid))
+                    if (!tbllocationExists(tbllocation.locationId))
                     {
                         return NotFound();
                     }
@@ -115,10 +115,10 @@ namespace AdminLTE.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tblCustomer);
+            return View(tbllocation);
         }
 
-        // GET: tblCustomers/Delete/5
+        // GET: locations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,30 +126,30 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCustomer = await db.tblCustomer
-                .FirstOrDefaultAsync(m => m.cusid == id);
-            if (tblCustomer == null)
+            var tbllocation = await db.tbllocation
+                .FirstOrDefaultAsync(m => m.locationId == id);
+            if (tbllocation == null)
             {
                 return NotFound();
             }
 
-            return View(tblCustomer);
+            return View(tbllocation);
         }
 
-        // POST: tblCustomers/Delete/5
+        // POST: locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tblCustomer = await db.tblCustomer.FindAsync(id);
-            db.tblCustomer.Remove(tblCustomer);
+            var tbllocation = await db.tbllocation.FindAsync(id);
+            db.tbllocation.Remove(tbllocation);
             await db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool tblCustomerExists(int id)
+        private bool tbllocationExists(int id)
         {
-            return db.tblCustomer.Any(e => e.cusid == id);
+            return db.tbllocation.Any(e => e.locationId == id);
         }
     }
 }

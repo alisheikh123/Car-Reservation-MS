@@ -48,9 +48,36 @@ else
 
                 <li class="nav-item ">
                     <a asp-controller="Reservation" asp-action="Reservation_Create" class="nav-link @Url.MakeActiveClass("Reservation","Reservation_Create")">
-                        <i class="nav-icon fas fa-cat"></i>
+                        <i class="nav-icon fas fa-typo3"></i>
                         <p>
                             Reservation
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a asp-controller="tblCars" asp-action="Index" class="nav-link @Url.MakeActiveClass("tblCars","Index")">
+                        <i class="nav-icon fas fa-car"></i>
+                        <p>
+                            Add New Car
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a asp-controller="tblCustomers" asp-action="Index" class="nav-link @Url.MakeActiveClass("tblCustomers","Index")">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Add New Customer
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a asp-controller="locations" asp-action="Index" class="nav-link @Url.MakeActiveClass("tbllocations","Index")">
+                        <i class="nav-icon fas fa-location-arrow"></i>
+                        <p>
+                            Add Location
                         </p>
                     </a>
                 </li>
@@ -63,8 +90,7 @@ else
                         Privacy
                     </p>
                 </a>
-            </li>
-}
+            </li>}
             </ul>
         </nav>
     </div>

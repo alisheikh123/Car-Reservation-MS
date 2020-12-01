@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace AdminLTE.MVC.Models.Class
         public string Category { get; set; }
         public int carId { get; set; }
         public string Car { get; set; }
+        public string CountryCode { get; set; }
+        
         public string Brand { get; set; }    
         public string Color { get; set; }
         public string Model { get; set; }
@@ -23,12 +26,14 @@ namespace AdminLTE.MVC.Models.Class
         [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
 
-        [RegularExpression("^[0-9]{5}-[0-9]{7}-[0-9]",ErrorMessage ="Format Must Be XXXXX-XXXXXXXX-X")]
+        [RegularExpression("^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$", ErrorMessage = "Incorrect CNIC")]
+        [Display(Name ="CNIC", Prompt = "34602-64160XX-X")]
         public string CNIC { get; set; }
         [Display(Name = "Mobile No")]
         public string MobileNo { get; set; }
         public string State { get; set; }
-        public string Country { get; set; }
+
+        public List<tblCountry> Country { get; set; }
         [Display(Name = "Street No")]
         public string StreetNo { get; set; }
 
@@ -48,13 +53,14 @@ namespace AdminLTE.MVC.Models.Class
         public string fromLocation { get; set; }
 
         [Display(Name = "From Date")]
-
+        [DataType(DataType.Date)]
         public DateTime fromDate { get; set; }
 
         [Display(Name = "To Location")]
         public string toLocation { get; set; }
 
         [Display(Name = "To Date")]
+        [DataType(DataType.Date)]
         public DateTime toDate { get; set; }
 
 

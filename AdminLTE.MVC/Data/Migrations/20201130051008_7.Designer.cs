@@ -4,75 +4,22 @@ using AdminLTE.MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdminLTE.MVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201130051008_7")]
+    partial class _7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("AdminLTE.MVC.Models.tblCity", b =>
-                {
-                    b.Property<int>("city_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("state_Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("city_Id");
-
-                    b.HasIndex("state_Id");
-
-                    b.ToTable("tblCity");
-                });
-
-            modelBuilder.Entity("AdminLTE.MVC.Models.tblCountry", b =>
-                {
-                    b.Property<int>("country_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("country_Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("country_Id");
-
-                    b.ToTable("tblCountry");
-                });
-
-            modelBuilder.Entity("AdminLTE.MVC.Models.tblState", b =>
-                {
-                    b.Property<int>("state_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("country_Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("state_Id");
-
-                    b.HasIndex("country_Id");
-
-                    b.ToTable("tblState");
-                });
 
             modelBuilder.Entity("Car_Rental_System.Models.tblCars", b =>
                 {
@@ -235,8 +182,8 @@ namespace AdminLTE.MVC.Data.Migrations
                     b.Property<string>("country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("fDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("fDate")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("fLocation")
                         .HasColumnType("nvarchar(max)");
@@ -462,24 +409,6 @@ namespace AdminLTE.MVC.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("AdminLTE.MVC.Models.tblCity", b =>
-                {
-                    b.HasOne("AdminLTE.MVC.Models.tblState", "tblState")
-                        .WithMany()
-                        .HasForeignKey("state_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AdminLTE.MVC.Models.tblState", b =>
-                {
-                    b.HasOne("AdminLTE.MVC.Models.tblCountry", "tblCountry")
-                        .WithMany()
-                        .HasForeignKey("country_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Car_Rental_System.Models.tblCars", b =>

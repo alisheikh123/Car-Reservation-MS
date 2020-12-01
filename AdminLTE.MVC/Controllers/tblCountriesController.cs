@@ -6,28 +6,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdminLTE.MVC.Data;
-using Car_Rental_System.Models;
+using AdminLTE.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace AdminLTE.MVC.Controllers
 {
     [AllowAnonymous]
-    public class tblCustomersController : Controller
+    public class tblCountriesController : Controller
     {
         private readonly ApplicationDbContext db;
 
-        public tblCustomersController(ApplicationDbContext context)
+        public tblCountriesController(ApplicationDbContext context)
         {
             db = context;
         }
 
-        // GET: tblCustomers
+        // GET: tblCountries
         public async Task<IActionResult> Index()
         {
-            return View(await db.tblCustomer.ToListAsync());
+            return View(await db.tblCountry.ToListAsync());
         }
 
-        // GET: tblCustomers/Details/5
+        // GET: tblCountries/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,39 +35,39 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCustomer = await db.tblCustomer
-                .FirstOrDefaultAsync(m => m.cusid == id);
-            if (tblCustomer == null)
+            var tblCountry = await db.tblCountry
+                .FirstOrDefaultAsync(m => m.country_Id == id);
+            if (tblCountry == null)
             {
                 return NotFound();
             }
 
-            return View(tblCustomer);
+            return View(tblCountry);
         }
 
-        // GET: tblCustomers/Create
+        // GET: tblCountries/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: tblCustomers/Create
+        // POST: tblCountries/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("cusid,First_Name,Last_Name,Email,CNIC,mobileno,state,country")] tblCustomer tblCustomer)
+        public async Task<IActionResult> Create([Bind("country_Id,country_Name")] tblCountry tblCountry)
         {
             if (ModelState.IsValid)
             {
-                db.Add(tblCustomer);
+                db.Add(tblCountry);
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tblCustomer);
+            return View(tblCountry);
         }
 
-        // GET: tblCustomers/Edit/5
+        // GET: tblCountries/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +75,22 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCustomer = await db.tblCustomer.FindAsync(id);
-            if (tblCustomer == null)
+            var tblCountry = await db.tblCountry.FindAsync(id);
+            if (tblCountry == null)
             {
                 return NotFound();
             }
-            return View(tblCustomer);
+            return View(tblCountry);
         }
 
-        // POST: tblCustomers/Edit/5
+        // POST: tblCountries/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("cusid,First_Name,Last_Name,Email,CNIC,mobileno,state,country")] tblCustomer tblCustomer)
+        public async Task<IActionResult> Edit(int id, [Bind("country_Id,country_Name")] tblCountry tblCountry)
         {
-            if (id != tblCustomer.cusid)
+            if (id != tblCountry.country_Id)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace AdminLTE.MVC.Controllers
             {
                 try
                 {
-                    db.Update(tblCustomer);
+                    db.Update(tblCountry);
                     await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!tblCustomerExists(tblCustomer.cusid))
+                    if (!tblCountryExists(tblCountry.country_Id))
                     {
                         return NotFound();
                     }
@@ -115,10 +115,10 @@ namespace AdminLTE.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tblCustomer);
+            return View(tblCountry);
         }
 
-        // GET: tblCustomers/Delete/5
+        // GET: tblCountries/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,30 +126,30 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCustomer = await db.tblCustomer
-                .FirstOrDefaultAsync(m => m.cusid == id);
-            if (tblCustomer == null)
+            var tblCountry = await db.tblCountry
+                .FirstOrDefaultAsync(m => m.country_Id == id);
+            if (tblCountry == null)
             {
                 return NotFound();
             }
 
-            return View(tblCustomer);
+            return View(tblCountry);
         }
 
-        // POST: tblCustomers/Delete/5
+        // POST: tblCountries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tblCustomer = await db.tblCustomer.FindAsync(id);
-            db.tblCustomer.Remove(tblCustomer);
+            var tblCountry = await db.tblCountry.FindAsync(id);
+            db.tblCountry.Remove(tblCountry);
             await db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool tblCustomerExists(int id)
+        private bool tblCountryExists(int id)
         {
-            return db.tblCustomer.Any(e => e.cusid == id);
+            return db.tblCountry.Any(e => e.country_Id == id);
         }
     }
 }

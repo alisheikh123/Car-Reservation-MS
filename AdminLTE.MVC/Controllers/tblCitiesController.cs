@@ -6,28 +6,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdminLTE.MVC.Data;
-using Car_Rental_System.Models;
+using AdminLTE.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace AdminLTE.MVC.Controllers
 {
     [AllowAnonymous]
-    public class tblCustomersController : Controller
+    public class tblCitiesController : Controller
     {
         private readonly ApplicationDbContext db;
 
-        public tblCustomersController(ApplicationDbContext context)
+        public tblCitiesController(ApplicationDbContext context)
         {
             db = context;
         }
 
-        // GET: tblCustomers
+        // GET: tblCities
         public async Task<IActionResult> Index()
         {
-            return View(await db.tblCustomer.ToListAsync());
+            var applicationDbContext = db.tblCity.Include(t => t.tblState);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: tblCustomers/Details/5
+        // GET: tblCities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,39 +36,42 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCustomer = await db.tblCustomer
-                .FirstOrDefaultAsync(m => m.cusid == id);
-            if (tblCustomer == null)
+            var tblCity = await db.tblCity
+                .Include(t => t.tblState)
+                .FirstOrDefaultAsync(m => m.city_Id == id);
+            if (tblCity == null)
             {
                 return NotFound();
             }
 
-            return View(tblCustomer);
+            return View(tblCity);
         }
 
-        // GET: tblCustomers/Create
+        // GET: tblCities/Create
         public IActionResult Create()
         {
+            ViewData["state_Id"] = new SelectList(db.tblState, "state_Id", "State");
             return View();
         }
 
-        // POST: tblCustomers/Create
+        // POST: tblCities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("cusid,First_Name,Last_Name,Email,CNIC,mobileno,state,country")] tblCustomer tblCustomer)
+        public async Task<IActionResult> Create([Bind("city_Id,state_Id,City")] tblCity tblCity)
         {
             if (ModelState.IsValid)
             {
-                db.Add(tblCustomer);
+                db.Add(tblCity);
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tblCustomer);
+            ViewData["state_Id"] = new SelectList(db.tblState, "state_Id", "state_Id", tblCity.state_Id);
+            return View(tblCity);
         }
 
-        // GET: tblCustomers/Edit/5
+        // GET: tblCities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +79,23 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCustomer = await db.tblCustomer.FindAsync(id);
-            if (tblCustomer == null)
+            var tblCity = await db.tblCity.FindAsync(id);
+            if (tblCity == null)
             {
                 return NotFound();
             }
-            return View(tblCustomer);
+            ViewData["state_Id"] = new SelectList(db.tblState, "state_Id", "state_Id", tblCity.state_Id);
+            return View(tblCity);
         }
 
-        // POST: tblCustomers/Edit/5
+        // POST: tblCities/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("cusid,First_Name,Last_Name,Email,CNIC,mobileno,state,country")] tblCustomer tblCustomer)
+        public async Task<IActionResult> Edit(int id, [Bind("city_Id,state_Id,City")] tblCity tblCity)
         {
-            if (id != tblCustomer.cusid)
+            if (id != tblCity.city_Id)
             {
                 return NotFound();
             }
@@ -99,12 +104,12 @@ namespace AdminLTE.MVC.Controllers
             {
                 try
                 {
-                    db.Update(tblCustomer);
+                    db.Update(tblCity);
                     await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!tblCustomerExists(tblCustomer.cusid))
+                    if (!tblCityExists(tblCity.city_Id))
                     {
                         return NotFound();
                     }
@@ -115,10 +120,11 @@ namespace AdminLTE.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tblCustomer);
+            ViewData["state_Id"] = new SelectList(db.tblState, "state_Id", "state_Id", tblCity.state_Id);
+            return View(tblCity);
         }
 
-        // GET: tblCustomers/Delete/5
+        // GET: tblCities/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,30 +132,31 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCustomer = await db.tblCustomer
-                .FirstOrDefaultAsync(m => m.cusid == id);
-            if (tblCustomer == null)
+            var tblCity = await db.tblCity
+                .Include(t => t.tblState)
+                .FirstOrDefaultAsync(m => m.city_Id == id);
+            if (tblCity == null)
             {
                 return NotFound();
             }
 
-            return View(tblCustomer);
+            return View(tblCity);
         }
 
-        // POST: tblCustomers/Delete/5
+        // POST: tblCities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tblCustomer = await db.tblCustomer.FindAsync(id);
-            db.tblCustomer.Remove(tblCustomer);
+            var tblCity = await db.tblCity.FindAsync(id);
+            db.tblCity.Remove(tblCity);
             await db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool tblCustomerExists(int id)
+        private bool tblCityExists(int id)
         {
-            return db.tblCustomer.Any(e => e.cusid == id);
+            return db.tblCity.Any(e => e.city_Id == id);
         }
     }
 }

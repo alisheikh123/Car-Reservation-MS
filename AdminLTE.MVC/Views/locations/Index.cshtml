@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Car_Rental_System.Models.tbllocation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.streetNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.streetAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stateabre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.state)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.country)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.streetNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.streetAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stateabre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.country)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.locationId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.locationId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.locationId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
