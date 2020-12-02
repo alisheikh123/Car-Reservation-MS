@@ -1,8 +1,8 @@
 ﻿var app = angular.module("resApp", []);
 app.controller("ReservationCtrl", function ($http, $scope) {
-    $http.get('/Reservation/getCountry').then(function (data)
+    $http.get('/Reservation/getCountry').then(function (d)
     {
-        $scope.countrylist = data.data;
+        $scope.countrylist = d.data;
 
     }, function ()
         {

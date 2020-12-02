@@ -25,12 +25,12 @@ namespace Car_Rental_System.Models
         public string Email { get; set; }
 
 
-        [Required]
+        
         [Display(Name = "CNIC")]
         [RegularExpression("^[0-9+]{5}-[0-9+]{7}-[0-9]{1}$", ErrorMessage = "Incorrect CNIC")]
         public string CNIC { get; set; }
 
-        [Required]
+        
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is Empty!")]
         public string mobileno { get; set; }
@@ -38,7 +38,7 @@ namespace Car_Rental_System.Models
         [Display(Name = "State")]
         public string state { get; set; }
 
-        [Required]
+      
         [Display(Name = "Country")]
         public string country { get; set; }
     }
