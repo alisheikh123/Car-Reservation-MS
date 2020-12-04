@@ -41,8 +41,27 @@ namespace AdminLTE.MVC.Controllers
             }
 
 
-            return Json( countrylist);
+            return Json(countrylist);
         
+        }
+        public IActionResult getState(string country_id)
+        {
+            var state = db.tblState.Where(x=>x.country_Id.Equals(country_id)).ToList();
+            List<state> statelist = new List<state>();
+            foreach (var s in state)
+            {
+                statelist.Add(new state
+                {
+
+                    country_Id = s.country_Id,
+                    state_Id = s.state_Id,
+                    State = s.State
+                });
+            }
+
+
+            return Json(statelist);
+
         }
         public IActionResult Reservation_Create()
         
@@ -64,10 +83,7 @@ namespace AdminLTE.MVC.Controllers
         public IActionResult Reservation_Create(ReservationNew Vm)
         {
             
-                var category = new tblCategories
-                {
-                    Title = Vm.car.Car
-                };
+                
                 var cars = new tblCars
                 {
                     catId = Vm.category.catId,
@@ -103,7 +119,7 @@ namespace AdminLTE.MVC.Controllers
 
                 };
           
-                db.tblCategories.Add(category);
+                
                 db.tblCars.Add(cars);
                 db.tblCustomer.Add(cus);
                 db.tbllocation.Add(loc);

@@ -14,17 +14,17 @@ namespace AdminLTE.MVC.Controllers
     [AllowAnonymous]
     public class tblCitiesController : Controller
     {
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext _context;
 
         public tblCitiesController(ApplicationDbContext context)
         {
-            db = context;
+            _context = context;
         }
 
         // GET: tblCities
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = db.tblCity.Include(t => t.tblState);
+            var applicationDbContext = _context.tblCity.Include(t => t.tblState);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCity = await db.tblCity
+            var tblCity = await _context.tblCity
                 .Include(t => t.tblState)
                 .FirstOrDefaultAsync(m => m.city_Id == id);
             if (tblCity == null)
@@ -50,7 +50,7 @@ namespace AdminLTE.MVC.Controllers
         // GET: tblCities/Create
         public IActionResult Create()
         {
-            ViewData["state_Id"] = new SelectList(db.tblState, "state_Id", "State");
+            ViewData["state_Id"] = new SelectList(_context.tblState, "state_Id", "State");
             return View();
         }
 
@@ -63,11 +63,11 @@ namespace AdminLTE.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Add(tblCity);
-                await db.SaveChangesAsync();
+                _context.Add(tblCity);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["state_Id"] = new SelectList(db.tblState, "state_Id", "state_Id", tblCity.state_Id);
+            ViewData["state_Id"] = new SelectList(_context.tblState, "state_Id", "State", tblCity.state_Id);
             return View(tblCity);
         }
 
@@ -79,12 +79,12 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCity = await db.tblCity.FindAsync(id);
+            var tblCity = await _context.tblCity.FindAsync(id);
             if (tblCity == null)
             {
                 return NotFound();
             }
-            ViewData["state_Id"] = new SelectList(db.tblState, "state_Id", "state_Id", tblCity.state_Id);
+            ViewData["state_Id"] = new SelectList(_context.tblState, "state_Id", "State", tblCity.state_Id);
             return View(tblCity);
         }
 
@@ -104,8 +104,8 @@ namespace AdminLTE.MVC.Controllers
             {
                 try
                 {
-                    db.Update(tblCity);
-                    await db.SaveChangesAsync();
+                    _context.Update(tblCity);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -120,7 +120,7 @@ namespace AdminLTE.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["state_Id"] = new SelectList(db.tblState, "state_Id", "state_Id", tblCity.state_Id);
+            ViewData["state_Id"] = new SelectList(_context.tblState, "state_Id", "State", tblCity.state_Id);
             return View(tblCity);
         }
 
@@ -132,7 +132,7 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblCity = await db.tblCity
+            var tblCity = await _context.tblCity
                 .Include(t => t.tblState)
                 .FirstOrDefaultAsync(m => m.city_Id == id);
             if (tblCity == null)
@@ -148,15 +148,15 @@ namespace AdminLTE.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tblCity = await db.tblCity.FindAsync(id);
-            db.tblCity.Remove(tblCity);
-            await db.SaveChangesAsync();
+            var tblCity = await _context.tblCity.FindAsync(id);
+            _context.tblCity.Remove(tblCity);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool tblCityExists(int id)
         {
-            return db.tblCity.Any(e => e.city_Id == id);
+            return _context.tblCity.Any(e => e.city_Id == id);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using AdminLTE.MVC.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,9 +20,8 @@ namespace Car_Rental_System.Models
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "Please Enter your Last Name!")]
         public string Last_Name { get; set; }
-        [Required]
+        
         [Display(Name = "Email Address")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Email Address is Empty!")]
         public string Email { get; set; }
 
 
@@ -35,11 +35,23 @@ namespace Car_Rental_System.Models
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is Empty!")]
         public string mobileno { get; set; }
 
+
+
+        [Display(Name = "City")]
+        public int city { get; set; }
+
         [Display(Name = "State")]
-        public string state { get; set; }
+        public int state { get; set; }
 
       
         [Display(Name = "Country")]
-        public string country { get; set; }
+        public int country { get; set; }
+
+
+        //---------Forign Keys----------
+       
+
+        [ForeignKey("city")]
+        public virtual tblCity tblCity { get; set; }
     }
 }

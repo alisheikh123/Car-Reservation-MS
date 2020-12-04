@@ -41,15 +41,16 @@ namespace AdminLTE.MVC.Models.Class
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Email Address is Empty!")]
         public string EmailAddress { get; set; }  
         public string CNIC { get; set; }
         [Display(Name = "Mobile No")]
         public string MobileNo { get; set; }
 
-        public string State { get; set; }
+        public int City { get; set; }
 
-        public string country_Name { get; set; }
+        public int State { get; set; }
+
+        public int country_Name { get; set; }
     }
     public class location {
         public int locationId { get; set; }

@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-4">
                     <label asp-for="customer.EmailAddress" class="control-label"></label>
-                    <input asp-for="customer.EmailAddress" class="form-control" type="email" name="myAddress" ng-model="text" required>
+                    <input asp-for="customer.EmailAddress" class="form-control"  name="myAddress" ng-model="email" required>
 
                 </div>
             </div>
@@ -84,18 +84,24 @@
                 </div>
                 <div class="col-4">
                     <label asp-for="customer.State" class="control-label"></label>
-                    <input asp-for="customer.State" class="form-control" required />
+                    <select asp-for="customer.State" class="form-control">
+                        <option value="">--Select State--</option>
+                        <option data-ng-repeat="t in statelist" value="{{t.state_Id}}">{{t.State}}</option>
+                    </select>
                 </div>
+               
             </div>
             <div class="row">
 
+
                 <div class="col-4">
-                    <label asp-for="customer.country_Name" class="control-label" ng-model="CountryId" ng-change="state()"></label>
-                    <select asp-for="customer.country_Name" class="form-control">
+                    <label asp-for="customer.country_Name" class="control-label"></label>
+                    <select asp-for="customer.country_Name" class="form-control" ng-model="CountryId" ng-change="state()">
                         <option value="">--Select Country--</option>
-                        <option data-ng-repeat="t in countrylist" value="{{t.country_Name}}">{{t.country_Name}}</option>
+                        <option data-ng-repeat="t in countrylist" value="{{t.country_Id}}">{{t.country_Name}}</option>
                     </select>
                 </div>
+
 
             </div>
         </div>
@@ -124,27 +130,6 @@
                     <label asp-for="location.toDate" class="control-label"></label>
                     <input asp-for="location.toDate" class="form-control" required />
                 </div>
-
-
-                <div class="col-4">
-                    <label asp-for="location.Countryloc" class="control-label"></label>
-                    <input asp-for="location.Countryloc" class="form-control" required />
-
-
-                </div>
-                <div class="col-4">
-                    <label asp-for="location.Stateloc" class="control-label"></label>
-                    <input asp-for="location.Stateloc" class="form-control" required />
-                </div>
-
-            </div>
-
-
-            <div class="row">
-                <div class="col-4">
-                    <label asp-for="location.City" class="control-label"></label>
-                    <input asp-for="location.City" class="form-control" required />
-                </div>
                 <div class="col-4">
                     <label asp-for="location.StreetNo" class="control-label"></label>
                     <input asp-for="location.StreetNo" class="form-control" required />
@@ -153,7 +138,29 @@
                     <label asp-for="location.Address" class="control-label"></label>
                     <input asp-for="location.Address" class="form-control" required />
                 </div>
+                <div class="col-4">
+                    <label asp-for="location.City" class="control-label"></label>
+                    <input asp-for="location.City" class="form-control" required />
+                </div>
+               
+                
 
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-4">
+                    <label asp-for="location.Stateloc" class="control-label"></label>
+                    <input asp-for="location.Stateloc" class="form-control" required />
+                </div>
+
+                <div class="col-4">
+                    <label asp-for="location.Countryloc" class="control-label"></label>
+                    <input asp-for="location.Countryloc" class="form-control" required />
+
+
+                </div>
 
 
             </div>
