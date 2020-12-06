@@ -14,17 +14,17 @@ namespace AdminLTE.MVC.Controllers
     [AllowAnonymous]
     public class tblStatesController : Controller
     {
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext _context;
 
         public tblStatesController(ApplicationDbContext context)
         {
-            db = context;
+            _context = context;
         }
 
         // GET: tblStates
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = db.tblState.Include(t => t.tblCountry);
+            var applicationDbContext = _context.tblState.Include(t => t.tblCountry);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblState = await db.tblState
+            var tblState = await _context.tblState
                 .Include(t => t.tblCountry)
                 .FirstOrDefaultAsync(m => m.state_Id == id);
             if (tblState == null)
@@ -50,7 +50,7 @@ namespace AdminLTE.MVC.Controllers
         // GET: tblStates/Create
         public IActionResult Create()
         {
-            ViewData["country_Id"] = new SelectList(db.tblCountry, "country_Id", "country_Name");
+            ViewData["country_Id"] = new SelectList(_context.tblCountry, "country_Id", "country_Name");
             return View();
         }
 
@@ -63,11 +63,11 @@ namespace AdminLTE.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Add(tblState);
-                await db.SaveChangesAsync();
+                _context.Add(tblState);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["country_Id"] = new SelectList(db.tblCountry, "country_Id", "country_Id", tblState.country_Id);
+            ViewData["country_Id"] = new SelectList(_context.tblCountry, "country_Id", "country_Name", tblState.country_Id);
             return View(tblState);
         }
 
@@ -79,12 +79,12 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblState = await db.tblState.FindAsync(id);
+            var tblState = await _context.tblState.FindAsync(id);
             if (tblState == null)
             {
                 return NotFound();
             }
-            ViewData["country_Id"] = new SelectList(db.tblCountry, "country_Id", "country_Id", tblState.country_Id);
+            ViewData["country_Id"] = new SelectList(_context.tblCountry, "country_Id", "country_Name", tblState.country_Id);
             return View(tblState);
         }
 
@@ -104,8 +104,8 @@ namespace AdminLTE.MVC.Controllers
             {
                 try
                 {
-                    db.Update(tblState);
-                    await db.SaveChangesAsync();
+                    _context.Update(tblState);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -120,7 +120,7 @@ namespace AdminLTE.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["country_Id"] = new SelectList(db.tblCountry, "country_Id", "country_Id", tblState.country_Id);
+            ViewData["country_Id"] = new SelectList(_context.tblCountry, "country_Id", "country_Name", tblState.country_Id);
             return View(tblState);
         }
 
@@ -132,7 +132,7 @@ namespace AdminLTE.MVC.Controllers
                 return NotFound();
             }
 
-            var tblState = await db.tblState
+            var tblState = await _context.tblState
                 .Include(t => t.tblCountry)
                 .FirstOrDefaultAsync(m => m.state_Id == id);
             if (tblState == null)
@@ -148,15 +148,15 @@ namespace AdminLTE.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tblState = await db.tblState.FindAsync(id);
-            db.tblState.Remove(tblState);
-            await db.SaveChangesAsync();
+            var tblState = await _context.tblState.FindAsync(id);
+            _context.tblState.Remove(tblState);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool tblStateExists(int id)
         {
-            return db.tblState.Any(e => e.state_Id == id);
+            return _context.tblState.Any(e => e.state_Id == id);
         }
     }
 }

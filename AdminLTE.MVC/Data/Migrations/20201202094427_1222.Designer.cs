@@ -4,14 +4,16 @@ using AdminLTE.MVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdminLTE.MVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201202094427_1222")]
+    partial class _1222
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,6 +138,7 @@ namespace AdminLTE.MVC.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("First_Name")
@@ -146,21 +149,16 @@ namespace AdminLTE.MVC.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("city")
-                        .HasColumnType("int");
-
-                    b.Property<int>("country")
-                        .HasColumnType("int");
+                    b.Property<string>("country")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("mobileno")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("state")
-                        .HasColumnType("int");
+                    b.Property<string>("state")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("cusid");
-
-                    b.HasIndex("city");
 
                     b.ToTable("tblCustomer");
                 });
@@ -488,15 +486,6 @@ namespace AdminLTE.MVC.Data.Migrations
                     b.HasOne("Car_Rental_System.Models.tblCategories", "tblCategories")
                         .WithMany()
                         .HasForeignKey("catId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Car_Rental_System.Models.tblCustomer", b =>
-                {
-                    b.HasOne("AdminLTE.MVC.Models.tblCity", "tblCity")
-                        .WithMany()
-                        .HasForeignKey("city")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

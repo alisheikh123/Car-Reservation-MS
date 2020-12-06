@@ -1,5 +1,7 @@
 ﻿
-@model AdminLTE.MVC.Models.Class.ReservationForm
+@model AdminLTE.MVC.Models.ViewModel.ReservationNew
+
+
 @{
     ViewData["Title"] = "Reservation_Create";
 }
@@ -12,23 +14,23 @@
 </head>
 <body ng-app="resApp" ng-controller="ReservationCtrl">
     <h1 style="text-align:center;">Reservation_Create</h1>
-    <form asp-controller="Reservation" asp-action="Reservation_Create"  name="myForm" method="post" role="form" class="form-horizontal">
+    <form asp-controller="Reservation" asp-action="Reservation_Create" name="myForm" method="post" role="form" class="form-horizontal">
         <div>
             <h4 style="text-align:center;">Car Detail</h4>
-            
+
             <div class="row">
                 <div class="col-4">
-                    <label asp-for="Category" class="control-label"></label>
-                    <select asp-for="catId" class="form-control" asp-items="@ViewBag.category">
+                    <label asp-for="category.Category" class="control-label"></label>
+                    <select asp-for="category.catId" class="form-control" asp-items="@ViewBag.category">
                     </select>
                 </div>
                 <div class="col-4">
-                    <label asp-for="Brand" class="control-label" ></label>
-                    <input asp-for="Brand" class="form-control" ng-model="brand" required/>
+                    <label asp-for="car.Brand" class="control-label"></label>
+                    <input asp-for="car.Brand" class="form-control" ng-model="brand" required />
                 </div>
                 <div class="col-4">
-                    <label asp-for="Car" class="control-label"></label>
-                    <select asp-for="Car" class="form-control" asp-items="@ViewBag.car">
+                    <label asp-for="car.Car" class="control-label"></label>
+                    <select asp-for="car.Car" class="form-control" asp-items="@ViewBag.car">
                     </select>
                 </div>
             </div>
@@ -36,12 +38,12 @@
             <div class="row">
 
                 <div class="col-4">
-                    <label asp-for="Color" class="control-label"></label>
-                    <input asp-for="Color" class="form-control" required/>
+                    <label asp-for="car.Color" class="control-label"></label>
+                    <input asp-for="car.Color" class="form-control" required />
                 </div>
                 <div class="col-4">
-                    <label asp-for="Model" class="control-label"></label>
-                    <input asp-for="Model" class="form-control" required/>
+                    <label asp-for="car.Model" class="control-label"></label>
+                    <input asp-for="car.Model" class="form-control" required />
                 </div>
             </div>
             <button class="btn btn-primary">Submit</button>
@@ -55,16 +57,16 @@
             </div>
             <div class="row">
                 <div class="col-4">
-                    <label asp-for="FirstName" class="control-label"></label>
-                    <input asp-for="FirstName" class="form-control" required/>
+                    <label asp-for="customer.FirstName" class="control-label"></label>
+                    <input asp-for="customer.FirstName" class="form-control" required />
                 </div>
                 <div class="col-4">
-                    <label asp-for="LastName" class="control-label"></label>
-                    <input asp-for="LastName" class="form-control" required/>
+                    <label asp-for="customer.LastName" class="control-label"></label>
+                    <input asp-for="customer.LastName" class="form-control" required />
                 </div>
                 <div class="col-4">
-                    <label asp-for="EmailAddress" class="control-label"></label>
-                    <input asp-for="EmailAddress" class="form-control" type="email" name="myAddress" ng-model="text" required>
+                    <label asp-for="customer.EmailAddress" class="control-label"></label>
+                    <input asp-for="customer.EmailAddress" class="form-control"  name="myAddress" ng-model="email" required>
 
                 </div>
             </div>
@@ -72,28 +74,34 @@
             <div class="row">
 
                 <div class="col-4">
-                    <label asp-for="CNIC" class="control-label"></label>
-                    <input asp-for="CNIC" class="form-control"  required/>
+                    <label asp-for="customer.CNIC" class="control-label"></label>
+                    <input asp-for="customer.CNIC" class="form-control" required />
 
                 </div>
                 <div class="col-4">
-                    <label asp-for="MobileNo" class="control-label"></label>
-                    <input asp-for="MobileNo" class="form-control" required/>
+                    <label asp-for="customer.MobileNo" class="control-label"></label>
+                    <input asp-for="customer.MobileNo" class="form-control" required />
                 </div>
                 <div class="col-4">
-                    <label asp-for="State" class="control-label"></label>
-                    <input asp-for="State" class="form-control" required/>
+                    <label asp-for="customer.State" class="control-label"></label>
+                    <select asp-for="customer.State" class="form-control">
+                        <option value="">--Select State--</option>
+                        <option data-ng-repeat="t in statelist" value="{{t.state_Id}}">{{t.State}}</option>
+                    </select>
                 </div>
+               
             </div>
             <div class="row">
 
+
                 <div class="col-4">
-                    <label asp-for="Country" class="control-label" ng-model="CountryId" ng-change="state()" ></label>
-                    <select asp-for="Country" class="form-control" >
-                        <option value="" >--Select Country--</option>
+                    <label asp-for="customer.country_Name" class="control-label"></label>
+                    <select asp-for="customer.country_Name" class="form-control" ng-model="CountryId" ng-change="state()">
+                        <option value="">--Select Country--</option>
                         <option data-ng-repeat="t in countrylist" value="{{t.country_Id}}">{{t.country_Name}}</option>
                     </select>
                 </div>
+
 
             </div>
         </div>
@@ -104,54 +112,58 @@
             <h4 style="text-align:center;">Location Details</h4>
             <div class="row">
                 <div class="col-4">
-                    <label asp-for="fromLocation" class="control-label"></label>
-                    <input asp-for="fromLocation" class="form-control" required/>
+                    <label asp-for="location.fromLocation" class="control-label"></label>
+                    <input asp-for="location.fromLocation" class="form-control" required />
                 </div>
                 <div class="col-4">
-                    <label asp-for="fromDate" class="control-label"></label>
-                    <input asp-for="fromDate" class="form-control" value="@(ViewBag.fDate)" />
+                    <label asp-for="location.fromDate" class="control-label"></label>
+                    <input asp-for="location.fromDate" class="form-control" value="@(ViewBag.fDate)" />
                 </div>
                 <div class="col-4">
-                    <label asp-for="toLocation" class="control-label"></label>
-                    <input asp-for="toLocation" class="form-control" required/>
+                    <label asp-for="location.toLocation" class="control-label"></label>
+                    <input asp-for="location.toLocation" class="form-control" required />
                 </div>
 
             </div>
             <div class="row">
                 <div class="col-4">
-                    <label asp-for="toDate" class="control-label"></label>
-                    <input asp-for="toDate" class="form-control" required/>
-                </div>
-
-
-                <div class="col-4">
-                    <label asp-for="Countryloc" class="control-label"></label>
-                    <input asp-for="Countryloc" class="form-control" required/>
-
-
+                    <label asp-for="location.toDate" class="control-label"></label>
+                    <input asp-for="location.toDate" class="form-control" required />
                 </div>
                 <div class="col-4">
-                    <label asp-for="Stateloc" class="control-label"></label>
-                    <input asp-for="Stateloc" class="form-control" required/>
+                    <label asp-for="location.StreetNo" class="control-label"></label>
+                    <input asp-for="location.StreetNo" class="form-control" required />
                 </div>
+                <div class="col-4">
+                    <label asp-for="location.Address" class="control-label"></label>
+                    <input asp-for="location.Address" class="form-control" required />
+                </div>
+              
+               
+                
 
             </div>
 
 
             <div class="row">
                 <div class="col-4">
-                    <label asp-for="City" class="control-label"></label>
-                    <input asp-for="City" class="form-control" required/>
+                    <label asp-for="location.City" class="control-label"></label>
+                    <select asp-for="location.City" class="form-control" ng-model="CityId" ng-change="state()">
+                        <option value="">--Select City--</option>
+                        <option data-ng-repeat="t in citylist" value="{{t.city_Id}}">{{t.City}}</option>
+                    </select>
                 </div>
                 <div class="col-4">
-                    <label asp-for="StreetNo" class="control-label"></label>
-                    <input asp-for="StreetNo" class="form-control" required/>
-                </div>
-                <div class="col-4">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" required/>
+                    <label asp-for="location.Stateloc" class="control-label"></label>
+                    <input asp-for="location.Stateloc" class="form-control" required />
                 </div>
 
+                <div class="col-4">
+                    <label asp-for="location.Countryloc" class="control-label"></label>
+                    <input asp-for="location.Countryloc" class="form-control" required />
+
+
+                </div>
 
 
             </div>

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-AdminLTE.MVC-920C0028-F5A1-4E98-88F4-E8AB0E68099F</UserSecretsId>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +11,18 @@
     <Compile Remove="Data\Migrations\20201125051314_addmodel7.Designer.cs" />
     <Compile Remove="Data\Migrations\20201125051701_addmodel7.cs" />
     <Compile Remove="Data\Migrations\20201125051701_addmodel7.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201203071232_777.cs" />
+    <Compile Remove="Data\Migrations\20201203071232_777.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201203071912_779.cs" />
+    <Compile Remove="Data\Migrations\20201203071912_779.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201203072425_7799.cs" />
+    <Compile Remove="Data\Migrations\20201203072425_7799.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201203073229_756.cs" />
+    <Compile Remove="Data\Migrations\20201203073229_756.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201203073616_756.cs" />
+    <Compile Remove="Data\Migrations\20201203073616_756.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201203074018_754.cs" />
+    <Compile Remove="Data\Migrations\20201203074018_754.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

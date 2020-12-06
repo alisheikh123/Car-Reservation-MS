@@ -2,58 +2,53 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
 }
-
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<body ng-app="myApp">
-    <style>
-        input.ng-invalid {
-             background-color:lightblue;
-        }
-    </style>
-    <label>{{color}}</label>
-    <div ng-controller="myCt">
-        <form name="myform">
-            <input type="text" ng-model="FirstName" />
-            <input type="text" ng-model="LastName" />
-            <label>{{Sum()}}</label>
-            <label>{{color}}</label>
-            <label ng-click="changename()">{{Name}}</label>
-
-        </form>
-
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>
 
-   
 
-        <script >
-            var app = angular.module("myApp", []);
-            app.controller("myCt", function ($scope) {
-                $scope.FirstName = "Ali",
-                    $scope.LastName = "Tahir",
-                    $scope.Name = "Happy Birthday",
-                    $scope.color = "Green",
-                    $scope.changename = function () {
-                        $scope.Name = "Happy Birthday Ali! :-)"
-                    };
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <p>The url of this page is:</p>
+        <h3>{{myUrl}}</h3>
+        <h3>{{title}}</h3>
+        <h3>{{Time}}</h3>
+        <h3>{{Nam}}</h3>
+        
+    </div>
 
-                $scope.Sum = function () {
-                    return $scope.FirstName + " " + $scope.LastName;
+    <p>This example uses the built-in $location service to get the absolute url of the page.</p>
 
-                };
+    <script>
+        var app = angular.module('myApp', []);
+        app.service('Ali', function () {
+            this.alifunction = function (x)
+            {
+                return x.toString(16);
+            } 
+        });
 
-            });
-            app.run(function ($routeScope) {
-                $routeScope.color = 'Blue';
+        app.controller('myCtrl', function ($scope, $location, $timeout, $interval, Ali,$http) {
+            $scope.myUrl = $location.absUrl();
+            $scope.title = "Welcome to Car Rental System";
+            $scope.Time = new Date().toLocaleTimeString();
+            $scope.Nam = Ali.alifunction(120);
+         
+            $timeout(function ()
+            {
+                $scope.title ="How are You Guys :-)"
 
-            }
+            }, 4000);
 
-            );
-           
-        </script>
-   
-
-    <p>Use the ng-model directive to bind the value of the input field to a property made in the controller.</p>
+            $interval(function ()
+            {
+                $scope.Time = new Date().toLocaleTimeString();
+            },1000);
+        });
+    </script>
 
 </body>
 </html>

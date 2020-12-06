@@ -81,6 +81,31 @@ else
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item ">
+                    <a asp-controller="tblCountries" asp-action="Index" class="nav-link @Url.MakeActiveClass("tblCountries","Index")">
+                        <i class="nav-icon fas fa-location-arrow"></i>
+                        <p>
+                            Add Country
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a asp-controller="tblStates" asp-action="Index" class="nav-link @Url.MakeActiveClass("tblStates","Index")">
+                        <i class="nav-icon fas fa-location-arrow"></i>
+                        <p>
+                            Add State
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a asp-controller="tblCities" asp-action="Index" class="nav-link @Url.MakeActiveClass("tblCities","Index")">
+                        <i class="nav-icon fas fa-location-arrow"></i>
+                        <p>
+                            Add City
+                        </p>
+                    </a>
+                </li>
                 @if (User.Identity.IsAuthenticated)
                 {
             <li class="nav-item ">
@@ -90,7 +115,8 @@ else
                         Privacy
                     </p>
                 </a>
-            </li>}
+            </li>
+}
             </ul>
         </nav>
     </div>
