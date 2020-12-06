@@ -138,10 +138,7 @@
                     <label asp-for="location.Address" class="control-label"></label>
                     <input asp-for="location.Address" class="form-control" required />
                 </div>
-                <div class="col-4">
-                    <label asp-for="location.City" class="control-label"></label>
-                    <input asp-for="location.City" class="form-control" required />
-                </div>
+              
                
                 
 
@@ -149,7 +146,13 @@
 
 
             <div class="row">
-
+                <div class="col-4">
+                    <label asp-for="location.City" class="control-label"></label>
+                    <select asp-for="location.City" class="form-control" ng-model="CityId" ng-change="state()">
+                        <option value="">--Select City--</option>
+                        <option data-ng-repeat="t in citylist" value="{{t.city_Id}}">{{t.City}}</option>
+                    </select>
+                </div>
                 <div class="col-4">
                     <label asp-for="location.Stateloc" class="control-label"></label>
                     <input asp-for="location.Stateloc" class="form-control" required />

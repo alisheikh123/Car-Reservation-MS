@@ -63,6 +63,27 @@ namespace AdminLTE.MVC.Controllers
             return Json(statelist);
 
         }
+
+        public IActionResult getCity()
+        {
+            var cities = db.tblCity.ToList();
+            List<city> citylist = new List<city>();
+            foreach (var s in cities)
+            {
+                citylist.Add(new city
+                {
+
+                    city_Id = s.city_Id,
+                    City = s.City,
+                    state_Id= s.state_Id
+                   
+                });
+            }
+
+
+            return Json(citylist);
+
+        }
         public IActionResult Reservation_Create()
         
         {         
