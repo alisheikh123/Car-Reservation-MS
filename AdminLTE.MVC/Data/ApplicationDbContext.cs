@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Car_Rental_System.Models;
-using AdminLTE.MVC.Models;
+
+ 
 
 namespace AdminLTE.MVC.Data
 {
